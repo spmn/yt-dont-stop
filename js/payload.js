@@ -15,13 +15,9 @@
 (function() {
     "use strict";
 
-    const interval = setInterval(() => {
-        const yt_act_mgr = document.querySelector("yt-activity-manager");
-        if (typeof yt_act_mgr.getTimeSinceActive === "function" && typeof yt.util.activity.getTimeSinceActive === "function") {
-            clearInterval(interval);
-            yt.util.activity.getTimeSinceActive = yt_act_mgr.getTimeSinceActive = function() {
-                return 0; 
-            };
-        }
-    }, 250);
+    const _lact = {
+        set: () => 0,
+        get: () => Date.now()
+    };
+    Object.defineProperty(window, "_lact", _lact);
 })();
